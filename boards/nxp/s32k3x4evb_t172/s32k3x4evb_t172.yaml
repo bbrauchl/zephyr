@@ -1,0 +1,25 @@
+# Copyright 2023 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+identifier: s32k3x4evb_t172
+name: NXP S32K3X4EVB-T172
+type: mcu
+arch: arm
+ram: 1024
+flash: 1024
+toolchain:
+  - zephyr
+supported:
+  - gpio
+  - uart
+  - can
+  - i2c
+  - adc
+  - spi
+  - watchdog
+  - netif:eth
+  - pwm
+  - dma
+  - display
+  - counter
+vendor: nxp
