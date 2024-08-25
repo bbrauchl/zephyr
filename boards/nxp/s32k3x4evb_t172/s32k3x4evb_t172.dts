@@ -23,8 +23,8 @@
 		zephyr,itcm = &itcm;
 		zephyr,dtcm = &dtcm;
 		zephyr,code-partition = &code_partition;
-		zephyr,console = &lpuart2;
-		zephyr,shell-uart = &lpuart2;
+		zephyr,console = &lpuart6;
+		zephyr,shell-uart = &lpuart6;
 		zephyr,flash-controller = &mx25l6433f;
 		zephyr,canbus = &flexcan0;
 		zephyr,display = &ssd1306;
@@ -282,6 +282,15 @@
 	pinctrl-names = "default";
 	current-speed = <115200>;
 	dmas = <&edma0 16 38>, <&edma0 17 39>;
+	dma-names = "tx", "rx";
+	status = "okay";
+};
+
+&lpuart6 {
+	pinctrl-0 = <&lpuart6_default>;
+	pinctrl-names = "default";
+	current-speed = <115200>;
+	dmas = <&edma0 18 46>, <&edma0 19 47>;
 	dma-names = "tx", "rx";
 	status = "okay";
 };
