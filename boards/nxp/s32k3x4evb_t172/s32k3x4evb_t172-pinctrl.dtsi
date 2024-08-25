@@ -47,6 +47,17 @@
 		};
 	};
 
+	lpuart6_default: lpuart6_default {
+		group1 {
+			pinmux = <PTA16_LPUART6_TX_O>;
+			output-enable;
+		};
+		group2 {
+			pinmux = <PTA15_LPUART6_RX>;
+			input-enable;
+		};
+	};
+
 	lpuart9_default: lpuart9_default {
 		group1 {
 			pinmux = <PTB3_LPUART9_TX_O>;
