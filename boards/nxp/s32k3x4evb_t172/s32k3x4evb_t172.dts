@@ -27,64 +27,39 @@
 		zephyr,shell-uart = &lpuart6;
 		zephyr,flash-controller = &mx25l6433f;
 		zephyr,canbus = &flexcan0;
-		zephyr,display = &ssd1306;
+		// zephyr,display = &ssd1306;
 	};
 
 	aliases {
 		dma0 = &edma0;
-		led0 = &user_led1_red;
-		led1 = &user_led1_green;
-		led2 = &user_led1_blue;
+		led0 = &user_led0_red;
+		led1 = &user_led0_green;
+		led2 = &user_led0_blue;
 		sw0 = &user_button_1;
 		sw1 = &user_button_2;
 		watchdog0 = &swt0;
 		/* For pwm test suites */
 		pwm-0 = &emios0_pwm;
 		pwm-1 = &flexio0_pwm;
-		red-pwm-led = &user_led1_red_pwm;
-		green-pwm-led = &user_led1_green_pwm;
-		blue-pwm-led = &user_led1_blue_pwm;
-		pwm-led0 = &user_led1_blue_pwm;
-		qdec0 = &qdec0;
+		red-pwm-led = &user_led0_red_pwm;
+		green-pwm-led = &user_led0_green_pwm;
+		blue-pwm-led = &user_led0_blue_pwm;
+		pwm-led0 = &user_led0_blue_pwm;
 	};
 
 	leds {
 		compatible = "gpio-leds";
-		user_led1_green: user_led1_green {
-			gpios = <&gpioa_h 11 GPIO_ACTIVE_LOW>;
-			label = "User RGB LED1 GREEN";
+		user_led0_red: user_led0_red {
+			gpios = <&gpioa_h 13 GPIO_ACTIVE_HIGH>;
+			label = "User RGB LED0 RED";
 		};
-		user_led1_blue: user_led1_blue {
-			gpios = <&gpioe_l 12 GPIO_ACTIVE_LOW>;
-			label = "User RGB LED1 BLUE";
+		user_led0_green: user_led0_green {
+			gpios = <&gpioa_h 14 GPIO_ACTIVE_HIGH>;
+			label = "User RGB LED0 GREEN";
 		};
-		user_led1_red: user_led1_red {
-			gpios = <&gpioe_l 14 GPIO_ACTIVE_LOW>;
-			label = "User RGB LED1 RED";
-		};
-		can_led0: can_led0 {
-			gpios = <&gpioc_h 2 GPIO_ACTIVE_LOW>;
-			label = "CAN LED0";
-		};
-		can_led1: can_led1 {
-			gpios = <&gpioe_l 5 GPIO_ACTIVE_LOW>;
-			label = "CAN LED1";
-		};
-		can_led2: can_led2 {
-			gpios = <&gpiod_h 4 GPIO_ACTIVE_LOW>;
-			label = "CAN LED2";
-		};
-		can_led3: can_led3 {
-			gpios = <&gpiob_h 8 GPIO_ACTIVE_LOW>;
-			label = "CAN LED3";
-		};
-		can_led4: can_led4 {
-			gpios = <&gpiob_h 10 GPIO_ACTIVE_LOW>;
-			label = "CAN LED4";
-		};
-		can_led5: can_led5 {
-			gpios = <&gpiod_h 15 GPIO_ACTIVE_LOW>;
-			label = "CAN LED5";
+		user_led0_blue: user_led0_blue {
+			gpios = <&gpioa_h 15 GPIO_ACTIVE_HIGH>;
+			label = "User RGB LED0 BLUE";
 		};
 	};
 
@@ -92,111 +67,38 @@
 	pwmleds {
 		compatible = "pwm-leds";
 
-		user_led1_blue_pwm: user_led1_blue {
-			pwms = <&emios1_pwm 5 PWM_MSEC(20) PWM_POLARITY_INVERTED>;
+		user_led0_red_pwm: user_led0_red {
+			pwms = <&emios1_pwm 12 PWM_MSEC(20) PWM_POLARITY_NORMAL>;
 		};
 
-		user_led1_green_pwm: user_led1_green {
-			pwms = <&emios1_pwm 10 PWM_MSEC(20) PWM_POLARITY_INVERTED>;
+		user_led0_green_pwm: user_led0_green {
+			pwms = <&emios1_pwm 13 PWM_MSEC(20) PWM_POLARITY_NORMAL>;
 		};
 
-		user_led1_red_pwm: user_led1_red {
-			pwms = <&emios0_pwm 19 PWM_MSEC(20) PWM_POLARITY_INVERTED>;
+		user_led0_blue_pwm: user_led0_blue {
+			pwms = <&emios1_pwm 14 PWM_MSEC(20) PWM_POLARITY_NORMAL>;
 		};
-	};
-
-	qdec0: qdec0 {
-		compatible = "nxp,qdec-s32";
-		pinctrl-0 = <&qdec_s32>;
-		pinctrl-names = "default";
-		micro-ticks-per-rev = <685440000>;
-		status = "okay";
-		trgmux = <&trgmux>;
-		trgmux-io-config =
-		<0 TRGMUX_IP_OUTPUT_EMIOS0_CH5_9_IPP_IND_CH6 TRGMUX_IP_INPUT_LCU1_LC0_OUT_I2>,
-		<1 TRGMUX_IP_OUTPUT_EMIOS0_CH5_9_IPP_IND_CH7 TRGMUX_IP_INPUT_LCU1_LC0_OUT_I3>,
-		<2 TRGMUX_IP_OUTPUT_LCU1_0_INP_I0            TRGMUX_IP_INPUT_SIUL2_IN2>,
-		<3 TRGMUX_IP_OUTPUT_LCU1_0_INP_I1            TRGMUX_IP_INPUT_SIUL2_IN3>;
-		lcu = <&lcu1>;
-		lcu-input-idx =
-		<LCU_IP_IN_0 LCU_IP_IN_1
-		 LCU_IP_IN_2 LCU_IP_IN_3>;
-		lcu-mux-sel =
-		<LCU_IP_MUX_SEL_LU_IN_0 LCU_IP_MUX_SEL_LU_IN_1
-		 LCU_IP_MUX_SEL_LU_OUT_0 LCU_IP_MUX_SEL_LU_OUT_1>;
-		lcu-output-filter-config =
-			/* LCU Out HW ID, Rise Filter, Fall Filter */
-			<0 5 5>, /* LCU O0 */
-			<1 5 5>, /* LCU O1 */
-			<2 2 2>, /* LCU O2 */
-			<3 2 2>; /* LCU O3 */
-		emios = <&emios0>;
-		/*
-		 * eMios channel numbers for qdec should be beyond the channel numbers
-		 * used by the emios pwm
-		 */
-		emios-channels = <6 7>;
 	};
 
 	gpio_keys {
 		compatible = "gpio-keys";
 		user_button_1: button_0 {
-			label = "User SW1";
-			gpios = <&gpiod_l 15 GPIO_ACTIVE_HIGH>;
+			label = "User SW0";
+			gpios = <&gpiob_h 10 GPIO_ACTIVE_HIGH>;
 			zephyr,code = <INPUT_KEY_0>;
 		};
 		user_button_2: button_1 {
-			label = "User SW2";
-			gpios = <&gpioa_h 9 GPIO_ACTIVE_HIGH>;
+			label = "User SW1";
+			gpios = <&gpiob_h 3 GPIO_ACTIVE_HIGH>;
 			zephyr,code = <INPUT_KEY_1>;
 		};
 	};
 
 	can_phy0: can-phy0 {
-		compatible = "nxp,tja1443", "can-transceiver-gpio";
+		compatible = "nxp,tja1153", "can-transceiver-gpio";
 		enable-gpios = <&gpioc_h 8 GPIO_ACTIVE_HIGH>;
 		standby-gpios = <&gpioc_h 5 GPIO_ACTIVE_LOW>;
 		max-bitrate = <5000000>;
-		#phy-cells = <0>;
-	};
-
-	can_phy1: can-phy1 {
-		compatible = "nxp,tja1443", "can-transceiver-gpio";
-		enable-gpios = <&gpiod_l 2 GPIO_ACTIVE_HIGH>;
-		standby-gpios = <&gpiod_h 7 GPIO_ACTIVE_LOW>;
-		max-bitrate = <5000000>;
-		#phy-cells = <0>;
-	};
-
-	can_phy2: can-phy2 {
-		compatible = "nxp,tja1463", "can-transceiver-gpio";
-		enable-gpios = <&gpiod_l 4 GPIO_ACTIVE_HIGH>;
-		standby-gpios = <&gpiod_h 6 GPIO_ACTIVE_LOW>;
-		max-bitrate = <8000000>;
-		#phy-cells = <0>;
-	};
-
-	can_phy3: can-phy3 {
-		compatible = "nxp,tja1463", "can-transceiver-gpio";
-		enable-gpios = <&gpiob_l 0 GPIO_ACTIVE_HIGH>;
-		standby-gpios = <&gpiob_l 1 GPIO_ACTIVE_LOW>;
-		max-bitrate = <8000000>;
-		#phy-cells = <0>;
-	};
-
-	can_phy4: can-phy4 {
-		compatible = "nxp,tja1153", "can-transceiver-gpio";
-		enable-gpios = <&gpioc_h 10 GPIO_ACTIVE_HIGH>;
-		standby-gpios = <&gpioc_h 9 GPIO_ACTIVE_LOW>;
-		max-bitrate = <2000000>;
-		#phy-cells = <0>;
-	};
-
-	can_phy5: can-phy5 {
-		compatible = "nxp,tja1153", "can-transceiver-gpio";
-		enable-gpios = <&gpioe_h 1 GPIO_ACTIVE_HIGH>;
-		standby-gpios = <&gpiod_h 14 GPIO_ACTIVE_LOW>;
-		max-bitrate = <2000000>;
 		#phy-cells = <0>;
 	};
 };
@@ -356,7 +258,7 @@
 		status = "okay";
 
 		partitions {
-			compatible = "fixed-partitions";
+			compatible = "fixepinctrld-partitions";
 			#address-cells = <1>;
 			#size-cells = <1>;
 
@@ -375,34 +277,11 @@
 	status = "okay";
 };
 
-&flexcan1 {
-	pinctrl-0 = <&flexcan1_default>;
-	pinctrl-names = "default";
-	phys = <&can_phy1>;
-};
-
 &flexcan2 {
 	pinctrl-0 = <&flexcan2_default>;
 	pinctrl-names = "default";
-	phys = <&can_phy2>;
-};
-
-&flexcan3 {
-	pinctrl-0 = <&flexcan3_default>;
-	pinctrl-names = "default";
-	phys = <&can_phy3>;
-};
-
-&flexcan4 {
-	pinctrl-0 = <&flexcan4_default>;
-	pinctrl-names = "default";
-	phys = <&can_phy4>;
-};
-
-&flexcan5 {
-	pinctrl-0 = <&flexcan5_default>;
-	pinctrl-names = "default";
-	phys = <&can_phy5>;
+	phys = <&can_phy0>;
+	/* Uses the same PHY, board needs resistors to be populated to use */
 };
 
 &lpi2c0 {
@@ -491,7 +370,7 @@
 		compatible = "nxp,tja1103";
 		status = "okay";
 		reg = <0x12>;
-		int-gpios = <&gpiod_l 5 GPIO_ACTIVE_LOW>;
+		int-gpios = <&gpiod_l 13 GPIO_ACTIVE_LOW>;
 		master-slave = "slave";
 	};
 };
@@ -573,13 +452,6 @@
 			polarity = "ACTIVE_HIGH";
 		};
 
-		rgb_red {
-			channel = <19>;
-			master-bus = <&emios0_bus_a>;
-			duty-cycle = <0>;
-			pwm-mode = "OPWMB";
-			polarity = "ACTIVE_LOW";
-		};
 	};
 };
 
@@ -598,13 +470,6 @@
 			period = <1000>;
 			status = "okay";
 		};
-
-		emios1_bus_f {
-			prescaler = <16>;
-			mode = "MCB_UP_COUNTER";
-			period = <1000>;
-			status = "okay";
-		};
 	};
 
 	emios1_pwm: pwm {
@@ -612,8 +477,16 @@
 		pinctrl-names = "default";
 		status = "okay";
 
+		rgb_red {
+			channel = <12>;
+			master-bus = <&emios0_bus_a>;
+			duty-cycle = <0>;
+			pwm-mode = "OPWMB";
+			polarity = "ACTIVE_LOW";
+		};
+
 		rgb_green {
-			channel = <10>;
+			channel = <13>;
 			master-bus = <&emios1_bus_a>;
 			duty-cycle = <0>;
 			pwm-mode = "OPWMB";
@@ -621,8 +494,8 @@
 		};
 
 		rgb_blue {
-			channel = <5>;
-			master-bus = <&emios1_bus_f>;
+			channel = <14>;
+			master-bus = <&emios1_bus_a>;
 			duty-cycle = <0>;
 			pwm-mode = "OPWMB";
 			polarity = "ACTIVE_LOW";

@@ -133,57 +133,13 @@
 		};
 	};
 
-	flexcan1_default: flexcan1_default {
-		group1 {
-			pinmux = <PTC9_CAN1_RX>;
-			input-enable;
-		};
-		group2 {
-			pinmux = <PTC8_CAN1_TX>;
-			output-enable;
-		};
-	};
-
 	flexcan2_default: flexcan2_default {
 		group1 {
-			pinmux = <PTE25_CAN2_RX>;
+			pinmux = <PTC14_CAN2_RX>;
 			input-enable;
 		};
 		group2 {
-			pinmux = <PTE24_CAN2_TX>;
-			output-enable;
-		};
-	};
-
-	flexcan3_default: flexcan3_default {
-		group1 {
-			pinmux = <PTC29_CAN3_RX>;
-			input-enable;
-		};
-		group2 {
-			pinmux = <PTC28_CAN3_TX>;
-			output-enable;
-		};
-	};
-
-	flexcan4_default: flexcan4_default {
-		group1 {
-			pinmux = <PTC31_CAN4_RX>;
-			input-enable;
-		};
-		group2 {
-			pinmux = <PTC30_CAN4_TX>;
-			output-enable;
-		};
-	};
-
-	flexcan5_default: flexcan5_default {
-		group1 {
-			pinmux = <PTC11_CAN5_RX>;
-			input-enable;
-		};
-		group2 {
-			pinmux = <PTC10_CAN5_TX>;
+			pinmux = <PTC15_CAN2_TX>;
 			output-enable;
 		};
 	};
@@ -267,28 +223,28 @@
 
 	emac0_default: emac0_default {
 		group1 {
-			pinmux = <PTC0_EMAC_MII_RMII_RXD0>,
-				<PTC1_EMAC_MII_RMII_RXD1>,
-				<PTC14_EMAC_MII_RMII_RX_ER>,
-				<PTC15_EMAC_MII_RMII_RX_DV>,
-				<PTD6_EMAC_MII_RMII_TX_CLK>;
+			pinmux = <PTC1_EMAC_MII_RMII_RXD0>,
+				<PTC0_EMAC_MII_RMII_RXD1>,
+				<PTC16_EMAC_MII_RMII_RX_ER>,
+				<PTC17_EMAC_MII_RMII_RX_DV>,
+				<PTD11_EMAC_MII_RMII_TX_CLK>;
 			input-enable;
 		};
 		group2 {
-			pinmux = <PTB5_EMAC_MII_RMII_TXD0>,
-				<PTB4_EMAC_MII_RMII_TXD1>,
-				<PTE9_EMAC_MII_RMII_TX_EN>;
+			pinmux = <PTC2_EMAC_MII_RMII_TXD0>,
+				<PTD7_EMAC_MII_RMII_TXD1>,
+				<PTD12_EMAC_MII_RMII_TX_EN>;
 		};
 	};
 
 	mdio0_default: mdio0_default {
 		group1 {
-			pinmux = <(PTD16_EMAC_MII_RMII_MDIO_O | PTD16_EMAC_MII_RMII_MDIO_I)>;
+			pinmux = <(PTB4_EMAC_MII_RMII_MDIO_O | PTB4_EMAC_MII_RMII_MDIO_I)>;
 			input-enable;
 			output-enable;
 		};
 		group2 {
-			pinmux = <PTE8_EMAC_MII_RMII_MDC>;
+			pinmux = <PTB5_EMAC_MII_RMII_MDC>;
 			output-enable;
 		};
 	};
@@ -315,16 +271,6 @@
 		group1 {
 			pinmux = <PTA17_FXIO_D19_O>, <PTE7_FXIO_D11_O>;
 			output-enable;
-		};
-	};
-
-	qdec_s32: qdec_s32 {
-		group1 {
-			pinmux = <PTB2_TRGMUX_IN3>,
-				<PTB3_TRGMUX_IN2>,
-				<TRGMUX_INT_OUT37_EMIOS_0_CH6_G>,
-				<TRGMUX_INT_OUT38_EMIOS_0_CH7_G>;
-			input-enable;
 		};
 	};
 };
